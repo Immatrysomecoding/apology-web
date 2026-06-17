@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>I'm Sorry</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+
+    <!-- AUDIO TRACKS -->
+    <audio id="aud-gymno"    loop preload="auto" src="sfx/gymnopedie.mp3"></audio>
+    <audio id="aud-shooting" loop preload="auto" src="sfx/shooting-stars.mp3"></audio>
+    <audio id="aud-einaudi"  loop preload="auto" src="sfx/einaudi-experience.mp3"></audio>
+    <audio id="aud-clair"    loop preload="auto" src="sfx/clair-de-lune.mp3"></audio>
+    <audio id="aud-yeah"          preload="auto" src="sfx/yeahoo.mp3"></audio>
+    <audio id="aud-fart"          preload="auto" src="sfx/dry-fart.mp3"></audio>
+    <audio id="aud-shatter"       preload="auto" src="sfx/shattered.mp3"></audio>
+
+    <!-- MUTE BUTTON -->
+    <button id="mute-btn" onclick="toggleMute()" title="Toggle music">🔊</button>
+
+    <canvas id="bg"></canvas>
+    <button class="back-btn" id="back-btn" onclick="goBack()">←</button>
+
+    <!-- LOGIN GATE -->
+    <div id="login-gate">
+      <div class="card login-card">
+        <p class="eyebrow">Knock knock</p>
+        <h1>Who's there?</h1>
+        <div class="divider"></div>
+        <p class="login-intro">Answer both to get in:</p>
+        <form id="login-form" autocomplete="off">
+          <label class="login-label" for="login-drink">
+            the drink you like
+            <span class="login-hint">(e.g. tradaocamxa — hint: cbkq)</span>
+          </label>
+          <input
+            type="text"
+            id="login-drink"
+            class="login-input"
+            placeholder="type your answer..."
+            autocomplete="off"
+          />
+          <label class="login-label" for="login-book">
+            the book you like
+            <span class="login-hint">(e.g. prideandprejudice — hint: trt)</span>
+          </label>
+          <input
+            type="text"
+            id="login-book"
+            class="login-input"
+            placeholder="type your answer..."
+            autocomplete="off"
+          />
+          <button type="submit" class="btn-forgive login-submit">Enter</button>
+        </form>
+        <p class="login-error" id="login-error"></p>
+      </div>
+    </div>
+
+    <!-- PAGE 1 -->
+    <div id="page1" style="display: none">
+      <div class="card">
+        <p class="eyebrow">A message for you</p>
+        <h1>Em xin lỗi,<br />chị Nhàn.</h1>
+        <div class="divider"></div>
+        <p class="message">
+          Trước hết, khi mà em nói là em muốn tất cả quay về vai trò đồng nghiệp
+          như cũ. Em thật sự rất muốn điều đó xảy ra, em đã cố gắng để khi cả hai
+          vô tình gặp nhau thì không có sự akwards nào cả và cũng nói chuyện
+          bình thường như trước đây. Nhưng em fucked up...
+          Đó cũng là lần mà em thật sự thích tính cách của một người đến vậy mà
+          thử tìm cơ hội xem sao. Và đó cũng là lần đầu tiên em nhận được sự
+          không mong muốn trong chuyện này, cho nên em cũng có những cái cảm xúc
+          hỗn tạp. Nhưng em thề với chị là không tồn tại cái cảm xúc ghét, hận,
+          trách móc... chị gì cả. Và em cũng không bao giờ ghét, hận, trách móc
+          chị bao giờ hết.
+          Nhưng em biết là em có tỏ vẻ khó chịu, không muốn nhìn mặt chị. Em chỉ
+          muốn nói là em chỉ sợ và xấu hổ khi lỡ hai ánh mắt mình nhìn nhau
+          thôi, bởi vì em sợ, em sợ là mình sẽ trải qua mớ cảm xúc hỗn độn ấy
+          nữa.
+        </p>
+        <p class="apology-quote">
+          <span class="quote-label">lời xin lỗi đầu tiên</span>
+          Em xin lỗi chị về việc em không kiểm soát được cảm xúc của mình mà để
+          nó kiểm soát cả hành động của mình luôn.
+        </p>
+        <p class="message">
+          Uhm, em nghĩ là trong suốt quá trình mình làm việc với nhau, em ngốc
+          nghếch không hiểu ý chị, cho nên là dẫn đến những hành động và lời nói
+          không được như chị mong muốn. Em cảm thấy như em mới thật sự là người
+          vứt bỏ "gì gì" đó chị muốn dành cho em (sau thời gian nhìn lại thì em
+          nghĩ như vậy, nếu không thì thui, em sẽ làm thằng hề trong mắt của
+          chị hihi).
+        </p>
+        <p class="apology-quote">
+          <span class="quote-label">lời xin lỗi thứ hai</span>
+          Em xin lỗi vì những hành động và lời nói nó làm chị khó chịu, không
+          theo ý chị. Em không biết chuộc lỗi sao bây giờ... chắc chỉ khôn
+          người ra thôi, em quá ngốc.
+        </p>
+        <p class="message">
+          Em không biết sau có vài sự bàn tán qua lại về chuyện ngày hôm đó. Lúc
+          đó em có nhìn thấy chị là đã đeo tai nghe rồi, ừ chắc em nghĩ là không
+          ai nghe đâu. Còn về em thì, trong lúc team building có 2 anh biết em
+          bị làm sao thôi nhưng em không nói ra là ai hết. Chị yên tâm nhé.
+          Còn em thì em chả quan tâm mọi người nói gì.
+        </p>
+        <p class="apology-quote">
+          <span class="quote-label">lời xin lỗi cuối cùng</span>
+          Em xin lỗi vì hành động của mình đã làm phiền chị rất nhiều và nó đã
+          ảnh hưởng đến chị trong công ty.
+        </p>
+        <p class="message-secondary">
+          Em biếttttttttttttttt chị giận em chứ. Cho dù chị có giận em đi nữa
+          thì em cũng không có giận chị đâu. Ughhhhhhhhhh nên chị đừng hiểu lầm
+          và forgive em nhé hihi.
+        </p>
+        <div class="btn-wrap">
+          <button class="btn-forgive" onclick="goForgiven()">
+            Forgive me 🤍
+          </button>
+          <button class="btn-chaos" onclick="goChaos()">
+            Noooo 😤 — I think this will make you happier
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAGE 3: FORGIVEN - elegant dark, different context from page 1 -->
+    <div id="page3">
+      <div class="p3-card">
+        <p class="p3-eyebrow">she forgave 🌙</p>
+        <span class="p3-icon">🌙</span>
+        <div class="p3-divider"></div>
+        <p class="p3-title">
+          Em cảm ơn chị
+        </p>
+        <p class="p3-subtitle">( em genuinely did not expect that )</p>
+        <p class="p3-msg">
+          Emmmmmmm cảm ơn chị đã click button này và thật sự là chị muốn đem
+          forgiveness đến cho em. Em chỉ cần chị đừng giận em nữa thôi, chắc em
+          nghĩ chị có thể cười khi vô tình nhìn thấy em là được.
+        </p>
+        <p class="p3-msg-soft">
+          Em không expect là mọi thứ sẽ trở về bình thường right away, không
+          sao cả, Rome không được xây dựng trong một ngày đâu.
+        </p>
+        <p class="p3-sign">— always there 🤍</p>
+      </div>
+    </div>
+
+    <!-- PAGE 2: CHAOS -->
+    <div id="page2">
+      <div
+        class="fly"
+        style="top: 15%; animation-duration: 12s; animation-delay: -3s"
+      >
+        im sorry im sorry im sorry im sorry
+      </div>
+      <div
+        class="fly"
+        style="top: 45%; animation-duration: 9s; animation-delay: -6s"
+      >
+        please forgive me please forgive me
+      </div>
+      <div
+        class="fly"
+        style="top: 72%; animation-duration: 15s; animation-delay: -1s"
+      >
+        i was wrong i was wrong i was wrong
+      </div>
+      <div class="chaos-container">
+        <div class="chaos-title">MY BAD 💀</div>
+        <p class="chaos-subtitle">a formal apology from your local F5 disaster</p>
+        <div class="meme-grid">
+          <div class="meme-card">
+            <span class="emoji-big">🗿</span>
+            <p class="meme-text">me realizing<br />i messed up</p>
+          </div>
+          <div class="meme-card">
+            <span class="emoji-big">🧎</span>
+            <p class="meme-text">me coming<br />to apologize</p>
+          </div>
+          <div class="meme-card">
+            <span class="emoji-big">😭</span>
+            <p class="meme-text">me crying<br />at 3am</p>
+          </div>
+          <div class="meme-card">
+            <span class="emoji-big">🤝</span>
+            <p class="meme-text">us after<br />you forgive me</p>
+          </div>
+        </div>
+        <div class="apology-box">
+          <p class="apology-text">
+            Ok so, I messed up... Big time. Em biết rằng nói xin lỗi cũng
+            không sửa mọi thứ về như cũ được, như tờ giấy vậy. Nhưng ít
+            nhất... em (và claude) làm cái web siêu ngầu này nên nó được
+            tính là gì chứ right???
+          </p>
+          <p class="apology-text sweet">
+            "For real though, em thật sự là không bao giờ giận chị. HU HU HU
+            HU HU HU HU HU HU HU HU HU HU HU HU HU"
+          </p>
+        </div>
+        <div id="btn-area2">
+          <button class="btn-rainbow" onclick="goForgiven()">
+            OK FINE I FORGIVE YOU 🎉
+          </button>
+          <br /><br />
+          <button
+            class="btn-chaos"
+            style="max-width: 320px; display: inline-block"
+            onclick="goPage4()"
+          >
+            Still don't forgive me??? 😭
+          </button>
+        </div>
+        <div class="accepted-state" id="done2">
+          <span class="big-heart">🥹</span>
+          <p class="yay">SHE FORGAVE ME LETS GOOO</p>
+          <p class="sweet-end">thank you. seriously. you have no idea 🤍</p>
+        </div>
+      </div>
+      <div class="ticker" id="ticker">
+        <span class="ticker-inner"
+          >🚨 BREAKING NEWS 🚨 LOCAL PERSON ISSUES FORMAL APOLOGY 🚨 EXPERTS SAY
+          THIS IS THE MOST SINCERE THING EVER DONE IN HUMAN HISTORY 🚨
+          ECONOMISTS BAFFLED 🚨 FORGIVENESS IMMINENT 🚨 STAY TUNED 🚨</span
+        >
+      </div>
+    </div>
+
+    <!-- PAGE 4: CHAOS IMAGES -->
+    <div id="page4">
+      <div class="p4-label">THIS IS MY BRAIN 💀</div>
+      <div class="p4-sub">a visual representation of my mental state rn</div>
+      <div class="p4-arrows">
+        <div class="p4-arrow">
+          <span>that's me</span><span class="arr">👇</span>
+        </div>
+        <div class="p4-arrow" style="animation-delay: 0.2s">
+          <span>also me</span><span class="arr">👇</span>
+        </div>
+      </div>
+      <div class="p4-imgs">
+        <div class="p4-col">
+          <img
+            class="p4-img"
+            id="img-dog"
+            src="img/dog.gif"
+            alt="dog human"
+          />
+          <button class="btn-getout" id="btn-getout" onclick="explodeOut()">
+            NAH FUK U GET OUT OF MY LIFE 💀
+          </button>
+        </div>
+        <div class="p4-col">
+          <img
+            class="p4-img"
+            id="img-brain"
+            src="img/brain.jpg"
+            alt="brain ass"
+          />
+          <button class="btn-forgive-p4" onclick="goForgiven()">
+            ok fine... i forgive you 🤍
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <canvas id="shard-canvas"></canvas>
+    <div id="shatter-overlay"></div>
+
+    <!-- FINAL MESSAGE -->
+    <div id="final-msg">
+      <div class="p3-card">
+        <div class="final-inner">
+        <pre class="final-rose-ascii">                                    o$$
+                                  $$$$$              ooo
+                                $$$$$$$$          o$$$" ""oo
+                              o$$$"$$"$$ o"$$$"oo$"$$$  $$o $
+                            o$$$$ $$$ o $o"     o""""""$o"$$oo"$
+                           o$$$o$o$$$"  $o$$$$$""" oo$$$$$o$$$ "
+                           $$$"$$$$$$ ooo$$""$"  o$$$$$o "$o"$$
+                           $$$ o"$$$$$"  $$$"ooo$ $$$""$$o$$" $o $
+                          "$$$ooo$$$$   $oo$$""$$$$$$  $o$"$ $"$ $
+                           "$$"$$$$$"   $$$    o$$$$oo""o$"  $$ $ $
+                            $$"o$""$    $$$$    "$$$$$o$$"  o$"$$"$
+                             """ $$$    $$$$o    $$$o$o ""$$$  "$
+                               oo$"$$    $$$$$" "$$$$ $$ooooo"""""
+                             o$$"$" $$o  $$$$$$   "o$$o$
+                           o$"" $$oo$$$$o$$$$$$$$$o$$$$
+                         o"$" o$$"  "$$$$$$$"$$"$$$$$$$
+                        o$$o$"""$o    "$$$o"o"o$$"    ""
+                       $$$""     ""o oooo""""""
+                    $o$$"          $$$$$$$$o
+                   o$$$            $"$$$$o$""$o
+                  o$$$"           $$$$$$$$oo"" $
+                 o$oo$            $$"$$$$$$$$"$"$
+                o$o"$               "$$$$$$$$$$ oo$
+                oo$$"               ""$ $$$$$$$$$ $
+                $$"$$                  "ooo$""$$$$$o
+                $$$"                      ""$$o$"$o"
+                $$$                           """"$
+                $$$
+                $$
+                $$
+    oo         $$$
+   $$$         $$$  oooo$$ooo$o$oo
+  o$$$$o       $$o$$$$$$$$$$$$$$"
+  $$$$$$o      $$$$$$$$$$$$$$$$"
+ $$$$$$$$o     o$$$$$$$$$o$$$$"
+ $$$$$$$$$o   $$$$$$$$$$$$$$"
+$$$$$$$$$$$$ o$$$$$$$$$$$$"
+$$$$$$$$$$$$ oo$"$$$$$$""
+ $$$$$$$$$$$$$"$
+ "$$$$$$$$$$$  $
+   ""$$$$"$$$$ "
+          $$ $$"
+          $$ $$
+          $$ $$
+          "$$$$</pre>
+        <div class="final-text-col">
+        <p class="p3-eyebrow">she still didn't forgive 🥀</p>
+        <div class="final-divider"></div>
+        <p class="p3-title">
+          it's okay.
+        </p>
+        <p class="p3-subtitle">( i think i already knew. )</p>
+        <p class="p3-msg">
+          Em cũng không mong sự tha thứ gì ở đây hết. Em chỉ muốn chị biết
+          rằng em đã cố gắng rồi; đôi khi những thứ dù có cố gắng ra sao thì
+          cũng không được, đôi khi có những thứ rất đáng để cố gắng bởi vì
+          càng khó đạt được càng khó mất.
+        </p>
+        <p class="p3-msg-soft">
+          Anyways, this rose is yours, withered or not.
+        </p>
+        <p class="p3-sign" style="color: rgba(180,120,120,0.4);">— still 🥀</p>
+        </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="js/script.js"></script>
+  </body>
+</html>

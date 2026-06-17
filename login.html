@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Knock knock</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <canvas id="bg"></canvas>
+
+    <div id="login-gate">
+      <div class="card login-card">
+        <p class="eyebrow">Knock knock</p>
+        <h1>Who's there?</h1>
+        <div class="divider"></div>
+        <p class="login-intro">Answer both to get in:</p>
+        <form id="login-form" autocomplete="off">
+          <label class="login-label" for="login-drink">
+            the drink you like
+            <span class="login-hint">(e.g. tradaocamxa — hint: cbkq)</span>
+          </label>
+          <input
+            type="text"
+            id="login-drink"
+            class="login-input"
+            placeholder="type your answer..."
+            autocomplete="off"
+          />
+          <label class="login-label" for="login-book">
+            the book you like
+            <span class="login-hint">(e.g. prideandprejudice — hint: trt)</span>
+          </label>
+          <input
+            type="text"
+            id="login-book"
+            class="login-input"
+            placeholder="type your answer..."
+            autocomplete="off"
+          />
+          <button type="submit" class="btn-forgive login-submit" id="login-submit-btn">Enter</button>
+        </form>
+        <p class="login-error" id="login-error"></p>
+      </div>
+    </div>
+
+    <script>
+      const canvas = document.getElementById("bg");
+      const ctx = canvas.getContext("2d");
+      let W, H, particles = [];
+      function resize() { W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+      function Particle() { this.reset(); }
+      Particle.prototype.reset = function () {
+        this.x = Math.random() * W; this.y = Math.random() * H;
+        this.r = Math.random() * 1.2 + 0.3; this.alpha = Math.random() * 0.4 + 0.05;
+        this.vx = (Math.random() - 0.5) * 0.18; this.vy = (Math.random() - 0.5) * 0.18;
+      };
+      function draw() {
+        ctx.clearRect(0, 0, W, H);
+        for (const p of particles) {
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255,255,255,${p.alpha})`;
+          ctx.fill();
+          p.x += p.vx; p.y += p.vy;
+          if (p.x < -10 || p.x > W + 10 || p.y < -10 || p.y > H + 10) p.reset();
+        }
+        requestAnimationFrame(draw);
+      }
+      addEventListener("resize", resize);
+      resize();
+      for (let i = 0; i < 100; i++) particles.push(new Particle());
+      draw();
+
+      const normalize = (s) => s.trim().toLowerCase().replace(/\s+/g, "");
+      const form = document.getElementById("login-form");
+      const errEl = document.getElementById("login-error");
+      const btn = document.getElementById("login-submit-btn");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const drinkEl = document.getElementById("login-drink");
+        const bookEl = document.getElementById("login-book");
+        btn.disabled = true;
+        try {
+          const res = await fetch("/api/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              drink: normalize(drinkEl.value),
+              book: normalize(bookEl.value),
+            }),
+          });
+          if (res.ok) {
+            location.href = "/";
+            return;
+          }
+          throw new Error("denied");
+        } catch {
+          errEl.textContent = "E hèm, thân ai nấy lo hồn ai tự giữ nghe chưa :[";
+          errEl.classList.remove("shake");
+          void errEl.offsetWidth;
+          errEl.classList.add("shake");
+          drinkEl.value = "";
+          bookEl.value = "";
+          drinkEl.focus();
+        } finally {
+          btn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>

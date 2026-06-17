@@ -1,30 +1,4 @@
 
-      // ── Login gate ──────────────────────────────────────
-      const LOGIN_DRINK = 'coldbrewkimquat';
-      const LOGIN_BOOK = 'therainbowtroops';
-      const normalize = (s) => s.trim().toLowerCase().replace(/\s+/g, '');
-
-      document.getElementById('login-form').addEventListener('submit', (e) => {
-        e.preventDefault();
-        const drinkEl = document.getElementById('login-drink');
-        const bookEl = document.getElementById('login-book');
-        const errEl = document.getElementById('login-error');
-        const drinkOk = normalize(drinkEl.value) === LOGIN_DRINK;
-        const bookOk = normalize(bookEl.value) === LOGIN_BOOK;
-        if (drinkOk && bookOk) {
-          document.getElementById('login-gate').style.display = 'none';
-          document.getElementById('page1').style.display = 'flex';
-        } else {
-          errEl.textContent = 'E hèm, thân ai nấy lo hồn ai tự giữ nghe chưa :[';
-          errEl.classList.remove('shake');
-          void errEl.offsetWidth;
-          errEl.classList.add('shake');
-          drinkEl.value = '';
-          bookEl.value = '';
-          drinkEl.focus();
-        }
-      });
-
       // ── Page history stack ─────────────────────────────
       const pageHistory = [];
 

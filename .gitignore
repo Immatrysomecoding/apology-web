@@ -1,3 +1,5 @@
 apology.html
 .claude/
 *.txt
+node_modules/
+.wrangler/

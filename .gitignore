@@ -1,3 +1,10 @@
 apology.html
 .claude/
 *.txt
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example

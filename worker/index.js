@@ -43,12 +43,13 @@ async function handleLogin(request, env) {
     });
   }
 
-  const expires = Date.now() + 1000 * 60 * 60 * 24; // signature valid 24h, but cookie itself is session-only
+  const SESSION_LIFETIME_SECONDS = 15 * 60; // absolute timeout, independent of browser/process lifetime
+  const expires = Date.now() + SESSION_LIFETIME_SECONDS * 1000;
   const token = await sign(`${expires}`, env.SESSION_SECRET);
   const headers = new Headers({ "Content-Type": "application/json" });
   headers.append(
     "Set-Cookie",
-    `session=${expires}.${token}; Path=/; HttpOnly; Secure; SameSite=Lax`,
+    `session=${expires}.${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=${SESSION_LIFETIME_SECONDS}`,
   );
   return new Response(JSON.stringify({ ok: true }), { status: 200, headers });
 }

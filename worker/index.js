@@ -66,7 +66,14 @@ export default {
     }
 
     if (await isAuthed(request, env)) {
-      return env.ASSETS.fetch(request);
+      const assetResponse = await env.ASSETS.fetch(request);
+      const headers = new Headers(assetResponse.headers);
+      headers.set("Cache-Control", "private, no-store");
+      return new Response(assetResponse.body, {
+        status: assetResponse.status,
+        statusText: assetResponse.statusText,
+        headers,
+      });
     }
 
     return Response.redirect(new URL("/login", request.url), 302);
